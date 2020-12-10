@@ -1,0 +1,2 @@
+export const ADD_VALUE_TO_SEARCH = "ADD_VALUE_TO_SEARCH";
+export const RESET_SEARCH= "RESET_SEARCH";
