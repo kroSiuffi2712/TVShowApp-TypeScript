@@ -1,7 +1,5 @@
-export interface TVShows { 
-    page: number;
-    results: Results[];
-    total_pages: number;
+export interface TVShowData { 
+    result: TVShowsResult[];
     total_results: number;
 }
 
@@ -13,6 +11,13 @@ export interface TVShowsResult {
     name: string;
     vote_average: number;
     vote_count: number; 
+}
+
+export interface TVShows { 
+    page: number;
+    results: Results[];
+    total_pages: number;
+    total_results: number;
 }
 
 export interface Results {
@@ -74,6 +79,6 @@ export interface tvShowError {
 
 export interface tvShowState { 
     loading: boolean;
-    data: TVShowsResult[] | null;
+    data: TVShowData | { result: [], total_results:null };
     error: string;
 }

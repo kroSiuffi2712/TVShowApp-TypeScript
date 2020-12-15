@@ -1,63 +1,32 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { isEmptyObject } from "jquery";
-import { useSelector } from "react-redux";
 
-
-import CircularProgress from "../components/CircularProgress";
-import NoResultFound from "../app/pages/NoResultFound";
-import BadRequest from "../app/pages/BadRequest";
-import Loading from "../app/pages/Loading";
+import NoResultFound from "../../app/pages/NoResultFound";
+import BadRequest from "../../app/pages/BadRequest";
+import Loading from "../../app/pages/Loading";
+import CircularProgress from "../../components/CircularProgress";
 import TVShowCast from "./TVShowCast";
-import { useWindowEvent } from "../helpers/useWindowEvent";
-
-import { RootState} from "../store/store"
+import { useTVShowCard } from "../../hooks/useTVShowCard";
 
 const { REACT_APP_IMAGE_PATH } = process.env;
 
 const TVShowsCard = () => {
-  const tv = useSelector((state:RootState) => state.tvShows);
-  const itemsPerPage = 9;
-  const [offset, setOffset] = useState(itemsPerPage);
+  const { tvShows,tvShowsPerPage, offset, totalTvShows } = useTVShowCard();  
   
-  const handleOnScroll = () => {
-    if (!isEmptyObject(tv.data)) {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-          if (offset < tv!.data!.length) {
-            setOffset(offset + itemsPerPage);
-        }
-      }
-    }
-  };
-
-  //Register a window listener
-  useWindowEvent("scroll", handleOnScroll);
-
-  useEffect(() => {
-    if (!isEmptyObject(tv.data)) {
-      resetValues();
-    }
-  }, [tv.data]);
-
-  const resetValues = () => {
-    setOffset(itemsPerPage);
-  };
-
-  //No result found
-  if (!isEmptyObject(tv.error)) return <BadRequest message={tv.error} />;
-
   //checking if the movies object is empty.
-  if (isEmptyObject(tv.data)) return <Loading />;
+  if (tvShows.loading) return <Loading />;
 
-  //No result found
-  if (tv?.data?.length === 0) return <NoResultFound />;
+  //Bad request.
+  if (!isEmptyObject(tvShows.error)) return <BadRequest message={tvShows.error} />;
 
-  //Current tvShows
-  const tvShows = tv!.data!.slice(0, offset);
+  //No result found.
+  if (tvShows.data.total_results === 0 && !tvShows.loading) return <NoResultFound />;
+  
+  
   return (
     <div className="d-flex flex-column">
       <div className="container-card d-flex flex-wrap justify-content-center m-auto">
-        {tvShows.map((item) => (
+        {tvShowsPerPage.map((item) => (
           <div key={`flip-card-${item.id}`} className="flip-card">
             <div key={`flip-card-inner-${item.id}`} className="flip-card-inner">
               <div
@@ -101,7 +70,7 @@ const TVShowsCard = () => {
           </div>
         ))}
       </div>
-      {offset < tv!.data!.length ? (
+      {offset < totalTvShows ? (
         <div className="data-loading">
           <i className="fa fa-refresh fa-spin"></i>
         </div>

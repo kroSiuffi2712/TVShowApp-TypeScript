@@ -2,8 +2,8 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { isEmptyObject } from "jquery";
 
-import { customDateformatted } from "../helpers/dateFormat";
-import { RootState } from "../store/store"
+import { customDateformatted } from "../../helpers/dateFormat";
+import { RootState } from "../../store/store"
 
 interface Props { 
     seasonId: number;

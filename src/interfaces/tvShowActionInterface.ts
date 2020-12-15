@@ -1,4 +1,4 @@
-import { TVShowsResult } from "./tvShowInterface";
+import { TVShowData } from "./tvShowInterface";
 import { FETCH_TVSHOWS_REQUEST, FETCH_TVSHOWS_SUCCESS, FETCH_TVSHOWS_FAILURE, RESET_TVSHOWS_LIST } from "../constans/index";
 
 interface tvShowRequestAction { 
@@ -7,7 +7,7 @@ interface tvShowRequestAction {
 
 interface tvShowsSuccessAction { 
     type: typeof FETCH_TVSHOWS_SUCCESS;
-    payload: TVShowsResult[];
+    payload: TVShowData;
 }
 
 interface tvShowFailureAction { 
@@ -18,6 +18,5 @@ interface tvShowFailureAction {
 interface resetTVShowsAction { 
     type: typeof RESET_TVSHOWS_LIST
 }
-
 
 export type tvShowAction = tvShowRequestAction | tvShowsSuccessAction | tvShowFailureAction | resetTVShowsAction;

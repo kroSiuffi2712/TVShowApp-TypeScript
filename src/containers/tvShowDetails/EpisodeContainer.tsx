@@ -1,9 +1,9 @@
 import { FC } from "react";
 import EpisodeList from "./EpisodeListContainer";
-import ToolBarButton from "../components/ToolBarButton";
+import ToolBarButton from "../../components/ToolBarButton";
 import { useState } from "react";
 
-import {Season } from "../interfaces/tvShowDetailsInterface"
+import {Season } from "../../interfaces/tvShowDetailsInterface"
 
 interface Props { 
     seasons: Season[];

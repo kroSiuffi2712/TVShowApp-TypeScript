@@ -1,7 +1,6 @@
 import { useState, useEffect, FC } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { isEmptyObject } from "jquery";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 import { addValueToSearch } from "../context/actions/searchAction";
@@ -39,7 +38,7 @@ const Search:FC<Props> = (props) => {
   };
 
   const keyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter" && isEmptyObject(errors.search)) {
+    if (event.key === "Enter" && (event.target as HTMLInputElement).value !=="" && !errors.search) {
       dispatch(addValueToSearch((event.target as HTMLInputElement).value));
     }
   };
@@ -67,7 +66,7 @@ const Search:FC<Props> = (props) => {
               onKeyDown={keyPress}
               ref={register({
                 pattern: {
-                  value: /^[A-Za-z0-9]+$/g,
+                  value: /^[A-Za-z0-9 ]+$/g,
                   message: "special characters are not allowed",
                 },
               })}

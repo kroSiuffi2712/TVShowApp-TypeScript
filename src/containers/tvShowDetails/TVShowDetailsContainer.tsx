@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import {
-  fetchTVShowsDetails
-} from "../context/actions/tvShowDetailsAction";
+  fetchTVShowsDetails,
+  resetTVShowDetails
+} from "../../context/actions/tvShowDetailsAction";
 import Season from "./SeasonContainer";
 
 
@@ -15,10 +16,14 @@ const TVShowsDetailsContainer = () => {
     useEffect(() => {
     (async () => {
         await dispatch(fetchTVShowsDetails(Number(id)));
-    })();
-  }, [dispatch, id]);
-
-
+      })();  
+      
+      //Clean Up
+      return () => { 
+         dispatch(resetTVShowDetails());
+      }
+    }, [dispatch, id]);
+  
   return <Season/>;
 };
 export default TVShowsDetailsContainer;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { isEmptyObject } from "jquery";
 
-import { Cast } from "../interfaces/tvShowInterface"
+import { Cast } from "../../interfaces/tvShowInterface"
 
 interface Props { 
   cast: Cast[];

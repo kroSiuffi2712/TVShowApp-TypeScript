@@ -4,7 +4,7 @@ import {FETCH_TVSHOWS_REQUEST, FETCH_TVSHOWS_SUCCESS, FETCH_TVSHOWS_FAILURE, RES
 
 const initialState : tvShowState = {
   loading: false,
-  data:null,
+  data: { result: [], total_results: null},
   error: "",
 };
 

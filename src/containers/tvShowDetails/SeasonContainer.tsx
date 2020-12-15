@@ -3,10 +3,10 @@ import { isEmptyObject } from "jquery";
 
 import ImageContainer from "./ImageSeasonContainer";
 import EpisodeContainer from "./EpisodeContainer";
-import LinkButton from "../components/LinkButton";
-import Loading from "../app/pages/Loading";
+import LinkButton from "../../components/LinkButton";
+import Loading from "../../app/pages/Loading";
 
-import { RootState} from "../store/store"
+import { RootState} from "../../store/store"
 
 const { REACT_APP_IMAGE_PATH } = process.env;
 
